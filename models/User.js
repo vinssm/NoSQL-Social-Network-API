@@ -6,14 +6,21 @@ const UserSchema = new Schema(
         username: {
             type: String,
             unique: true,
-            required: 'Please enter a username!',
+            required: 'Enter your  username',
             trim: true
         },
         email: {
             type: String,
-            required: 'Please enter an email address!',
+            required: 'Enter your email address',
             unique: true,
-            match: [/.+\@.+\..+/]
+            validate: {
+                validator(validEmail) {
+                  return /^([a-zA-Z0-9_\.-]+)@([\da-z\.-]+)\.([a-z]{2,6})(\.[a-z]{2,6})?$/.test(
+                    validEmail
+                  );
+                },
+                message: "Enter a valid email address",
+              },
         },
         thoughts: [
             {
@@ -37,14 +44,14 @@ const UserSchema = new Schema(
     }
 );
 
-// Get total count of friends on retrieval
+// Friend Count
 UserSchema.virtual('friendCount').get(function () {
     return this.friends.length;
 });
 
-// Create the User model using the UserSchema
+
 const User = model('User', UserSchema);
 
-// Export the User model
+// Export Users
 module.exports = User;
 

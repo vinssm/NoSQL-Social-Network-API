@@ -3,8 +3,8 @@ const { User } = require('../models');
 const userController = {
     getAllUsers(req, res) {
         User.find({})
-            .populate({ 
-                
+            .populate({ // Display all thought data for user with populate 
+                path: 'thoughts',
                 select: '-__v' // - specified field not displayed
             })
             .select('-__v')
@@ -17,15 +17,15 @@ const userController = {
 
     getUserById({ params }, res) {
         User.findOne({ _id: params.id })
-            .populate({ 
-               
+            .populate({ // Display all thought data for user with populate 
+                path: 'thoughts',
                 select: '-__v'
             })
             .select('-__v')
             .then(dbUserData => {
                 // If no user is found, send 404
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with thid id' })
+                    res.status(404).json({ message: 'No user found with that ID' })
                     return;
                 }
                 res.json(dbUserData);
@@ -43,13 +43,13 @@ const userController = {
             .catch(err => res.status(400).json(err));
     },
 
-    // Update user by id
+    // Update user
     updateUser({ params, body }, res) {
-        User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true }) // return updated document
+        User.findOneAndUpdate({ _id: params.id }, body, { new: true, runValidators: true })
             .then(dbUserData => {
                 // If no user is found, send 404
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this id' })
+                    res.status(404).json({ message: 'No user found with that ID' })
                     return;
                 }
                 res.json(dbUserData);
@@ -65,7 +65,7 @@ const userController = {
         User.findOneAndDelete({ _id: params.id })
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this id' });
+                    res.status(404).json({ message: 'No user found with this id!' });
                     return;
                 }
                 res.json(dbUserData);
@@ -82,7 +82,7 @@ const userController = {
         )
             .then(dbUserData => {
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with this id' });
+                    res.status(404).json({ message: 'No user found with this id!' });
                     return;
                 }
                 res.json(dbUserData);
