@@ -2,6 +2,8 @@
 
 ## Challenge is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list.
 
+* [DEMO LINK](https://www.youtube.com/watch?v=NGRSbf2TtZ0)
+
 ## User Story
 - AS A social media startup
 - I WANT an API for my social network that uses a NoSQL database
@@ -22,5 +24,5 @@
 - Start mongod server and then 
 - npm start 
 
-* [DEMO LINK](https://www.youtube.com/watch?v=NGRSbf2TtZ0)
+
 
