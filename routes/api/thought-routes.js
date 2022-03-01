@@ -18,7 +18,7 @@ router
 router
     .route('/:id')
     .get(getThoughtById)
-    .put(updateThought)
+    .put(updateThought);
 
 router
     .route('/:userId')
@@ -30,7 +30,7 @@ router
 
 router
     .route('/:thoughtId/reactions')
-    .post(addReaction)
+    .post(addReaction);
 
 router
     .route('/:thoughtId/reactions/:reactionId')

@@ -3,9 +3,9 @@ const { User } = require('../models');
 const userController = {
     getAllUsers(req, res) {
         User.find({})
-            .populate({ // Display all thought data for user with populate 
+            .populate({ 
                 path: 'thoughts',
-                select: '-__v' // - specified field not displayed
+                select: '-__v' 
             })
             .select('-__v')
             .then(dbUserData => res.json(dbUserData))
@@ -17,15 +17,15 @@ const userController = {
 
     getUserById({ params }, res) {
         User.findOne({ _id: params.id })
-            .populate({ // Display all thought data for user with populate 
+            .populate({ 
                 path: 'thoughts',
                 select: '-__v'
             })
             .select('-__v')
             .then(dbUserData => {
-                // If no user is found, send 404
+                // No user then send 404
                 if (!dbUserData) {
-                    res.status(404).json({ message: 'No user found with that ID' })
+                    res.status(404).json({ message: 'User Not found' })
                     return;
                 }
                 res.json(dbUserData);

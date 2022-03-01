@@ -69,6 +69,7 @@ module.exports = (
 
   const year = dateObj.getFullYear();
 
+  
   let hour;
   // check for 24-hr time
   if (dateObj.getHours > 12) {
